@@ -1,6 +1,6 @@
 import { useAuth } from "@/providers/auth-provider";
 
-export const Dashboard = () => {
+export const DashboardPage = () => {
   const { user, logout } = useAuth();
 
   return (

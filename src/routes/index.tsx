@@ -1,23 +1,23 @@
 import { Navigate, RouteObject } from "react-router-dom";
 
-import { AuthForm } from "@/components/auth";
 import { ProtectedRoute } from "@/components/protected-route";
-import { Dashboard } from "@/pages/dashboard";
+import { AuthPage } from "@/pages/auth";
+import { DashboardPage } from "@/pages/dashboard";
 
 export const routes: RouteObject[] = [
   {
     path: "/login",
-    element: <AuthForm mode="login" />,
+    element: <AuthPage mode="login" />,
   },
   {
     path: "/register",
-    element: <AuthForm mode="register" />,
+    element: <AuthPage mode="register" />,
   },
   {
     path: "/dashboard",
     element: (
       <ProtectedRoute>
-        <Dashboard />
+        <DashboardPage />
       </ProtectedRoute>
     ),
   },
