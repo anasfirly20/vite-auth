@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useAuthPage } from "./functions";
 
 import { AuthForm } from "@/components/auth";
-import { useAuth } from "@/providers/auth-provider";
-import { AuthSchema } from "@/schemas/auth";
 
 type AuthPageProps = {
   mode: "login" | "register";
@@ -10,21 +8,8 @@ type AuthPageProps = {
 
 export const AuthPage = (props: AuthPageProps) => {
   const { mode } = props;
-  const navigate = useNavigate();
-  const { login } = useAuth();
 
-  const handleSubmit = (values: AuthSchema) => {
-    if (mode === "login") {
-      login({ username: values.username });
-      navigate("/dashboard");
-    } else {
-      console.log("Register:", values);
-    }
-  };
-
-  const handleToggleMode = () => {
-    navigate(mode === "login" ? "/register" : "/login");
-  };
+  const { handleSubmit, handleToggleMode } = useAuthPage({ mode });
 
   return (
     <AuthForm

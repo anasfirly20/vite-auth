@@ -4,10 +4,13 @@ import { Navbar } from "./components/navbar";
 import { Providers } from "./providers";
 import { routes } from "./routes";
 
+import { Toaster } from "@/components/ui/toaster";
+
 function App() {
   return (
     <Providers>
       <BrowserRouter>
+        <Toaster />
         <Navbar />
         <Routes>
           {routes.map((route) => (
