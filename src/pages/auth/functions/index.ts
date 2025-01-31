@@ -13,21 +13,26 @@ type UseAuthPage = {
 
 export const useAuthPage = (props: UseAuthPage) => {
   const { mode } = props;
+  const { setToken } = useAuth();
   const navigate = useNavigate();
-  const { login } = useAuth();
   const { toast } = useToast();
 
   const handleLogin = async (body: AuthCredentials) => {
     try {
-      await UserApi.login({
+      const res = await UserApi.login({
         email: body.email,
         password: body.password,
       });
-      login({ username: body.email });
-      navigate("/dashboard");
-      toast({
-        description: "✅ Login successful!",
-      });
+
+      if (res.token) {
+        setToken(res.token);
+        navigate("/dashboard", {
+          replace: true,
+        });
+        toast({
+          description: "✅ Login successful!",
+        });
+      }
     } catch (error) {
       console.error(error);
       toast({
@@ -41,15 +46,20 @@ export const useAuthPage = (props: UseAuthPage) => {
 
   const handleRegister = async (body: AuthCredentials) => {
     try {
-      await UserApi.register({
+      const res = await UserApi.register({
         email: body.email,
         password: body.password,
       });
-      login({ username: body.email });
-      navigate("/dashboard");
-      toast({
-        description: "✅ Registration successful!",
-      });
+
+      if (res.token) {
+        setToken(res.token);
+        navigate("/dashboard", {
+          replace: true,
+        });
+        toast({
+          description: "✅ Registration successful!",
+        });
+      }
     } catch (error) {
       console.error(error);
       toast({

@@ -1,30 +1,27 @@
-import { createContext, useContext, useState } from "react";
-
-interface User {
-  username: string;
-}
+import Cookies from "js-cookie";
+import { createContext, useContext } from "react";
 
 interface AuthContextType {
-  user: User | null;
-  login: (userData: User) => void;
-  logout: () => void;
+  token: string | undefined;
+  setToken: (token: string) => void;
+  clearToken: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-
-  const login = (userData: User) => {
-    setUser(userData);
+  const setToken = (token: string) => {
+    Cookies.set("auth-token", token, { secure: true });
   };
 
-  const logout = () => {
-    setUser(null);
+  const clearToken = () => {
+    Cookies.remove("auth-token");
   };
+
+  const token = Cookies.get("auth-token");
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ token, setToken, clearToken }}>
       {children}
     </AuthContext.Provider>
   );
