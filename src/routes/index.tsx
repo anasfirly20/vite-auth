@@ -1,6 +1,7 @@
 import { Navigate, RouteObject } from "react-router-dom";
 
-import { ProtectedRoute } from "@/components/protected-route";
+import { ProtectedRoute } from "./protected-route";
+
 import { AuthPage } from "@/pages/auth";
 import { DashboardPage } from "@/pages/dashboard";
 
