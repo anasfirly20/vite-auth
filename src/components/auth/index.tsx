@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -13,33 +14,63 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/providers/auth-provider";
 
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-  password: z.string().min(8).max(50),
-});
+const formSchema = z
+  .object({
+    username: z.string().min(2).max(50),
+    password: z.string().min(8).max(50),
+    confirmPassword: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      if (data.confirmPassword) {
+        return data.password === data.confirmPassword;
+      }
+      return true;
+    },
+    {
+      message: "Passwords don't match",
+      path: ["confirmPassword"],
+    }
+  );
 
-export const LoginForm = () => {
+interface AuthFormProps {
+  mode: "login" | "register";
+}
+
+export const AuthForm = ({ mode }: AuthFormProps) => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    if (mode === "login") {
+      login({ username: values.username });
+      navigate("/dashboard");
+    } else {
+      console.log("Register:", values);
+    }
   }
+
+  const toggleMode = () => {
+    navigate(mode === "login" ? "/register" : "/login");
+  };
 
   return (
     <div className="h-screen w-full flex items-center justify-center">
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
-            Login
+            {mode === "login" ? "Login" : "Register"}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -75,9 +106,40 @@ export const LoginForm = () => {
                   </FormItem>
                 )}
               />
+              {mode === "register" && (
+                <FormField
+                  control={form.control}
+                  name="confirmPassword"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Confirm Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Confirm your password"
+                          type="password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
               <Button type="submit" className="w-full">
-                Sign in
+                {mode === "login" ? "Sign in" : "Sign up"}
               </Button>
+              <div className="text-center mt-4">
+                <Button
+                  variant="link"
+                  type="button"
+                  onClick={toggleMode}
+                  className="text-sm"
+                >
+                  {mode === "login"
+                    ? "Don't have an account? Register"
+                    : "Already have an account? Login"}
+                </Button>
+              </div>
             </form>
           </Form>
         </CardContent>

@@ -1,13 +1,17 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 
+import { AuthProvider } from "./auth-provider";
 import { ThemeProvider } from "./theme-provider";
 
-type ProvidersProps = {
-  children: React.ReactNode;
-};
+const queryClient = new QueryClient();
 
-export const Providers = (props: ProvidersProps) => {
-  const { children } = props;
-
-  return <ThemeProvider>{children}</ThemeProvider>;
-};
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="light">
+        <AuthProvider>{children}</AuthProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+}
