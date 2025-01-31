@@ -1,11 +1,11 @@
-import { Button } from "./components/ui/button";
+import { Navbar } from "./components/ui/navbar";
+import { Providers } from "./providers";
 
 function App() {
   return (
-    <>
-      <h1>HOME</h1>
-      <Button>SUBMIT</Button>
-    </>
+    <Providers>
+      <Navbar />
+    </Providers>
   );
 }
 
