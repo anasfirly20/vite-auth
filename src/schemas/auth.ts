@@ -2,8 +2,11 @@ import { z } from "zod";
 
 export const authSchema = z
   .object({
-    email: z.string().email(),
-    password: z.string().min(8).max(50),
+    email: z.string().email({ message: "Please enter a valid email address" }),
+    password: z
+      .string()
+      .min(6, { message: "Password must be at least 6 characters" })
+      .max(50, { message: "Password cannot exceed 50 characters" }),
     confirmPassword: z.string().optional(),
   })
   .refine(
