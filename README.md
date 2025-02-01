@@ -1,50 +1,83 @@
-# React + TypeScript + Vite
+# Authentication App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+Authentication application built with Vite, React and TypeScript that provides secure user authentication with internationalization support.
 
-Currently, two official plugins are available:
+## Features
+- User Authentication: Secure login and registration functionality
+- Form Validation: Comprehensive form validation with Zod
+- Dark Mode: Built-in dark mode support
+- Protected Routes: Secure route protection for authenticated users
+- Internationalization: Supports English and Russian languages
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setup Instructions
 
-## Expanding the ESLint configuration
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Development Setup
+1. Clone the repository
+   ```bash
+   git clone <repository-url>
+   cd vite-auth
 
-- Configure the top-level `parserOptions` property like this:
+2. Install dependencies
+   ```bash
+   npm install
+   # or
+   yarn install
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+3. Start the development server
+   ```bash
+   npm run dev
+   # or
+   yarn dev
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+4. Open your browser and navigate to URL_ADDRESS:5173
+   
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Tech Stack
+- React 18.3.1
+- TypeScript 5.6.2
+- Vite 6.0.5
+- TanStack Query 5.66.0
+- Zod 3.24.1
+- React Hook Form 7.54.2
+- React-i18next 15.4.0
+- Tailwind CSS 3.4.0
+- Shadcn/ui 0.9.4
+- Axios 1.7.9
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Features in Detail
+### Authentication
+- Secure login and registration
+- Protected routes
+- Token-based authentication
+- Persistent sessions
+
+### Internationalization
+- English and Russian language support
+- Dynamic content translation
+- Translated form validations
+- Language persistence
+
+### UI/UX
+- Responsive design
+- Dark mode support
+- Loading states
+- Toast notifications
+- Form validation feedback
+
+## Project Structure
+src/
+├── api/       
+├── assets/  
+├── components/  
+├── config/      
+├── hooks/       
+├── lib/         
+├── pages/       
+├── providers/   
+├── routes/      
+└── schemas/
