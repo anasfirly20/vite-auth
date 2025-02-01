@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Navbar } from "./components/navbar";
+import { Loading } from "./components/ui/loading";
 import { Providers } from "./providers";
 import { routes } from "./routes";
 
@@ -12,16 +14,18 @@ function App() {
       <BrowserRouter>
         <Toaster />
         <Navbar />
-        <Routes>
-          {routes.map((route) => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={route.element}
-              index={route.index}
-            />
-          ))}
-        </Routes>
+        <Suspense fallback={<Loading fullScreen />}>
+          <Routes>
+            {routes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+                index={route.index}
+              />
+            ))}
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </Providers>
   );

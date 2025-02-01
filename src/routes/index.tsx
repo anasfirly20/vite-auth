@@ -1,9 +1,10 @@
+import { lazy } from "react";
 import { Navigate, RouteObject } from "react-router-dom";
 
 import { ProtectedRoute } from "./protected-route";
 
-import { AuthPage } from "@/pages/auth";
-import { DashboardPage } from "@/pages/dashboard";
+const AuthPage = lazy(() => import("@/pages/auth"));
+const DashboardPage = lazy(() => import("@/pages/dashboard"));
 
 export const routes: RouteObject[] = [
   {

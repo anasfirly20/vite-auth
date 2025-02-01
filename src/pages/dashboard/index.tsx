@@ -1,29 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { LogOut, Mail, User } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
-import UserApi from "@/api/routes/user";
+import { useDashbaord } from "./functions";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loading } from "@/components/ui/loading";
-import { useAuth } from "@/providers/auth-provider";
 
-export const DashboardPage = () => {
-  const { token, clearToken } = useAuth();
-  const navigate = useNavigate();
-
-  const { data: profile, isLoading } = useQuery({
-    queryKey: ["profile"],
-    queryFn: () => UserApi.GetMe(),
-    enabled: !!token,
-  });
-
-  const handleLogout = () => {
-    clearToken();
-    navigate("/", {
-      replace: true,
-    });
-  };
+const DashboardPage = () => {
+  const { data, isLoading, handleLogout } = useDashbaord();
 
   if (isLoading) {
     return <Loading fullScreen />;
@@ -45,14 +29,14 @@ export const DashboardPage = () => {
                 <p className="text-sm font-medium text-muted-foreground">
                   Email
                 </p>
-                <p className="text-sm">{profile?.email}</p>
+                <p className="text-sm">{data?.email}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-lg bg-muted/50">
               <User className="text-muted-foreground" />
               <div>
                 <p className="text-sm font-medium text-muted-foreground">ID</p>
-                <p className="text-sm">{profile?.id}</p>
+                <p className="text-sm">{data?.id}</p>
               </div>
             </div>
           </div>
@@ -70,3 +54,7 @@ export const DashboardPage = () => {
     </div>
   );
 };
+
+DashboardPage.displayName = "DashboardPage";
+
+export default DashboardPage;

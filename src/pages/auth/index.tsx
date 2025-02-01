@@ -6,7 +6,7 @@ type AuthPageProps = {
   mode: "login" | "register";
 };
 
-export const AuthPage = (props: AuthPageProps) => {
+const AuthPage = (props: AuthPageProps) => {
   const { mode } = props;
 
   const { handleSubmit, handleToggleMode, isLoading } = useAuthPage({ mode });
@@ -20,3 +20,7 @@ export const AuthPage = (props: AuthPageProps) => {
     />
   );
 };
+
+AuthPage.displayName = "AuthPage";
+
+export default AuthPage;
