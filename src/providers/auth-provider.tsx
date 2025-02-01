@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface AuthContextType {
   token: string | undefined;
@@ -10,15 +10,19 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const setToken = (token: string) => {
-    Cookies.set("auth-token", token, { secure: true });
+  const [token, setTokenState] = useState<string | undefined>(() =>
+    Cookies.get("auth-token")
+  );
+
+  const setToken = (newToken: string) => {
+    Cookies.set("auth-token", newToken, { secure: true });
+    setTokenState(newToken);
   };
 
   const clearToken = () => {
     Cookies.remove("auth-token");
+    setTokenState(undefined);
   };
-
-  const token = Cookies.get("auth-token");
 
   return (
     <AuthContext.Provider value={{ token, setToken, clearToken }}>
