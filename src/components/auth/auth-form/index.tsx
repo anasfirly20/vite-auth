@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TFunction } from "i18next";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -38,6 +39,12 @@ export const AuthForm = ({
       confirmPassword: "",
     },
   });
+
+  // Clear errors when switching between login/registration mode
+  useEffect(() => {
+    form.clearErrors();
+    form.reset();
+  }, [mode, form]);
 
   return (
     <div className="h-screen w-full flex items-center justify-center">
