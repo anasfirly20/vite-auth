@@ -9,7 +9,7 @@ export const Navbar = () => {
   const { token } = useAuth();
 
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-5 sm:px-20 lg:px-72">
       <div className="container flex h-14 items-center justify-between">
         <Button
           variant="link"
