@@ -4,12 +4,11 @@ import { useAuthPage } from "./functions";
 
 import { AuthForm } from "@/components/auth/auth-form";
 
-type AuthPageProps = {
+interface AuthPageProps {
   mode: "login" | "register";
-};
+}
 
-const AuthPage = (props: AuthPageProps) => {
-  const { mode } = props;
+const AuthPage = ({ mode }: AuthPageProps) => {
   const { t } = useTranslation();
 
   const { handleSubmit, handleToggleMode, isLoading } = useAuthPage({

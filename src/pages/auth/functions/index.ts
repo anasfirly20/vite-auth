@@ -9,13 +9,12 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/providers/auth-provider";
 import { AuthSchema } from "@/schemas/auth";
 
-type UseAuthPage = {
+interface UseAuthPageProps {
   mode: "login" | "register";
   t: TFunction<"translation", undefined>;
-};
+}
 
-export const useAuthPage = (props: UseAuthPage) => {
-  const { mode, t } = props;
+export const useAuthPage = ({ mode, t }: UseAuthPageProps) => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();

@@ -70,14 +70,14 @@ Authentication application built with Vite, React and TypeScript that provides s
 - Form validation feedback
 
 ## Project Structure
-src/
-├── api/       
-├── assets/  
-├── components/  
+src/    
+├── api/           
+├── assets/      
+├── components/      
 ├── config/      
 ├── hooks/       
 ├── lib/         
 ├── pages/       
 ├── providers/   
 ├── routes/      
-└── schemas/
+└── schemas/  

@@ -43,5 +43,13 @@
     "passwordMin": "Password must be at least 6 characters long.",
     "passwordMax": "Password cannot be longer than 50 characters.",
     "passwordMatch": "Passwords do not match."
+  },
+  "modal": {
+    "logout": {
+      "title": "Confirm Logout",
+      "description": "Are you sure you want to logout?",
+      "cancel": "Cancel",
+      "confirm": "Yes, logout"
+    }
   }
 }
