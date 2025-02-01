@@ -24,7 +24,12 @@
     "signup": "Sign up"
   },
   "common": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "error": {
+      "title": "Something went wrong",
+      "description": "An error occurred while fetching the data",
+      "retry": "Try again"
+    }
   },
   "notification": {
     "success": {

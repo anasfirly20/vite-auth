@@ -6,12 +6,15 @@ import { useDashboardPage } from "./functions";
 import { LogoutModal } from "@/components/modals/logout-modal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Error } from "@/components/ui/error";
 import { Loading } from "@/components/ui/loading";
 
 const DashboardPage = () => {
   const {
     data,
     isLoading,
+    error,
+    refetch,
     handleLogout,
     showModal,
     handleShowModal,
@@ -21,6 +24,10 @@ const DashboardPage = () => {
 
   if (isLoading) {
     return <Loading fullScreen />;
+  }
+
+  if (error) {
+    return <Error fullScreen onRetry={refetch} />;
   }
 
   return (

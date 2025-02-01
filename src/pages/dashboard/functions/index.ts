@@ -26,10 +26,11 @@ export const useDashboardPage = () => {
     handleCloseModal();
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["profile"],
     queryFn: () => UserApi.getMe(),
     enabled: !!token,
+    retry: 3,
   });
 
   return {
@@ -39,5 +40,7 @@ export const useDashboardPage = () => {
     showModal,
     handleShowModal,
     handleCloseModal,
+    error,
+    refetch,
   };
 };
