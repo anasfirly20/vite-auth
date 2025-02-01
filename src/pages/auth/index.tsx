@@ -1,6 +1,6 @@
 import { useAuthPage } from "./functions";
 
-import { AuthForm } from "@/components/auth";
+import { AuthForm } from "@/components/auth/auth-form";
 
 type AuthPageProps = {
   mode: "login" | "register";
