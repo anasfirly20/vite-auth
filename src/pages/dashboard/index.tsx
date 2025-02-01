@@ -1,4 +1,5 @@
 import { LogOut, Mail, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { useDashbaord } from "./functions";
 
@@ -9,6 +10,8 @@ import { Loading } from "@/components/ui/loading";
 const DashboardPage = () => {
   const { data, isLoading, handleLogout } = useDashbaord();
 
+  const { t } = useTranslation();
+
   if (isLoading) {
     return <Loading fullScreen />;
   }
@@ -18,7 +21,7 @@ const DashboardPage = () => {
       <Card className="max-w-md mx-auto">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">
-            Profile Dashboard
+            {t("dashboard.title")}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -27,7 +30,7 @@ const DashboardPage = () => {
               <Mail className="text-muted-foreground" />
               <div>
                 <p className="text-sm font-medium text-muted-foreground">
-                  Email
+                  {t("dashboard.email")}
                 </p>
                 <p className="text-sm">{data?.email}</p>
               </div>
@@ -35,7 +38,9 @@ const DashboardPage = () => {
             <div className="flex items-center gap-3 p-4 rounded-lg bg-muted/50">
               <User className="text-muted-foreground" />
               <div>
-                <p className="text-sm font-medium text-muted-foreground">ID</p>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {t("dashboard.id")}
+                </p>
                 <p className="text-sm">{data?.id}</p>
               </div>
             </div>
@@ -47,7 +52,7 @@ const DashboardPage = () => {
             className="w-full"
           >
             <LogOut className="mr-2 h-4 w-4" />
-            Logout
+            {t("dashboard.logout")}
           </Button>
         </CardContent>
       </Card>

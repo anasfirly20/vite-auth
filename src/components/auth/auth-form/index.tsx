@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { TFunction } from "i18next";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ interface AuthFormProps {
   onSubmit: (values: AuthSchema) => void;
   onToggleMode: VoidFunction;
   isLoading: boolean;
+  t: TFunction<"translation", undefined>;
 }
 
 export const AuthForm = ({
@@ -26,6 +28,7 @@ export const AuthForm = ({
   onSubmit,
   onToggleMode,
   isLoading,
+  t,
 }: AuthFormProps) => {
   const form = useForm<AuthSchema>({
     resolver: zodResolver(authSchema),
@@ -41,7 +44,7 @@ export const AuthForm = ({
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
-            {mode === "login" ? "Login" : "Register"}
+            {mode === "login" ? t("auth.login") : t("auth.register")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -52,9 +55,12 @@ export const AuthForm = ({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t("auth.email")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your email" {...field} />
+                      <Input
+                        placeholder={t("auth.emailPlaceholder")}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -65,10 +71,10 @@ export const AuthForm = ({
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>{t("auth.password")}</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Enter your password"
+                        placeholder={t("auth.password")}
                         type="password"
                         {...field}
                       />
@@ -83,10 +89,12 @@ export const AuthForm = ({
                   name="confirmPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Confirm Password</FormLabel>
+                      <FormLabel>
+                        {t("auth.confirmPasswordPlaceholder")}
+                      </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Confirm your password"
+                          placeholder={t("auth.confirmPassword")}
                           type="password"
                           {...field}
                         />
@@ -97,7 +105,7 @@ export const AuthForm = ({
                 />
               )}
               <Button type="submit" className="w-full" loading={isLoading}>
-                {mode === "login" ? "Sign in" : "Sign up"}
+                {mode === "login" ? t("auth.signIn") : t("auth.signUp")}
               </Button>
               <div className="text-center mt-4">
                 <Button
@@ -107,8 +115,8 @@ export const AuthForm = ({
                   className="text-sm"
                 >
                   {mode === "login"
-                    ? "Don't have an account? Register"
-                    : "Already have an account? Login"}
+                    ? t("auth.noAccount")
+                    : t("auth.haveAccount")}
                 </Button>
               </div>
             </form>

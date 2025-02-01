@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { useAuthPage } from "./functions";
 
 import { AuthForm } from "@/components/auth/auth-form";
@@ -8,8 +10,12 @@ type AuthPageProps = {
 
 const AuthPage = (props: AuthPageProps) => {
   const { mode } = props;
+  const { t } = useTranslation();
 
-  const { handleSubmit, handleToggleMode, isLoading } = useAuthPage({ mode });
+  const { handleSubmit, handleToggleMode, isLoading } = useAuthPage({
+    mode,
+    t,
+  });
 
   return (
     <AuthForm
@@ -17,6 +23,7 @@ const AuthPage = (props: AuthPageProps) => {
       onSubmit={handleSubmit}
       onToggleMode={handleToggleMode}
       isLoading={isLoading}
+      t={t}
     />
   );
 };

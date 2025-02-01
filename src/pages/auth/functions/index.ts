@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { TFunction } from "i18next";
 import { useNavigate } from "react-router-dom";
 
 import UserApi from "@/api/routes/user";
@@ -10,10 +11,11 @@ import { AuthSchema } from "@/schemas/auth";
 
 type UseAuthPage = {
   mode: "login" | "register";
+  t: TFunction<"translation", undefined>;
 };
 
 export const useAuthPage = (props: UseAuthPage) => {
-  const { mode } = props;
+  const { mode, t } = props;
   const { setToken } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -25,7 +27,7 @@ export const useAuthPage = (props: UseAuthPage) => {
         setToken(data.token);
         navigate("/dashboard", { replace: true });
         toast({
-          description: "✅ Login successful!",
+          description: `✅ ${t("notification.success.login")}`,
         });
       }
     },
@@ -35,7 +37,7 @@ export const useAuthPage = (props: UseAuthPage) => {
         description:
           error instanceof AxiosError
             ? `❌ ${error.response?.data?.message || error.message}`
-            : "❌ Login failed!",
+            : `❌ ${t("notification.error.login")}`,
       });
     },
   });
@@ -47,7 +49,7 @@ export const useAuthPage = (props: UseAuthPage) => {
         setToken(data.token);
         navigate("/dashboard", { replace: true });
         toast({
-          description: "✅ Registration successful!",
+          description: `✅ ${t("notification.success.register")}`,
         });
       }
     },
@@ -57,7 +59,7 @@ export const useAuthPage = (props: UseAuthPage) => {
         description:
           error instanceof AxiosError
             ? `❌ ${error.response?.data?.message || error.message}`
-            : "❌ Registration failed!",
+            : `❌ ${t("notification.error.register")}`,
       });
     },
   });
