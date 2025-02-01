@@ -12,7 +12,7 @@ export default class UserApi {
     return response?.data;
   }
 
-  static async GetMe(): Promise<User> {
+  static async getMe(): Promise<User> {
     const response = await api.get("/profile");
     return response?.data;
   }

@@ -31,6 +31,8 @@ export const AuthForm = ({
   isLoading,
   t,
 }: AuthFormProps) => {
+  const loginMode = mode === "login";
+
   const form = useForm<AuthSchema>({
     resolver: zodResolver(authSchema(t)),
     defaultValues: {
@@ -51,7 +53,7 @@ export const AuthForm = ({
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-center">
-            {mode === "login" ? t("auth.login") : t("auth.register")}
+            {loginMode ? t("auth.login") : t("auth.register")}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -112,7 +114,7 @@ export const AuthForm = ({
                 />
               )}
               <Button type="submit" className="w-full" loading={isLoading}>
-                {mode === "login" ? t("auth.signIn") : t("auth.signUp")}
+                {loginMode ? t("auth.signIn") : t("auth.signUp")}
               </Button>
               <div className="text-center mt-4">
                 <Button
@@ -121,9 +123,7 @@ export const AuthForm = ({
                   onClick={onToggleMode}
                   className="text-sm"
                 >
-                  {mode === "login"
-                    ? t("auth.noAccount")
-                    : t("auth.haveAccount")}
+                  {loginMode ? t("auth.noAccount") : t("auth.haveAccount")}
                 </Button>
               </div>
             </form>

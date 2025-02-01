@@ -10,7 +10,7 @@ export const useDashbaord = () => {
 
   const { data, isLoading } = useQuery({
     queryKey: ["profile"],
-    queryFn: () => UserApi.GetMe(),
+    queryFn: () => UserApi.getMe(),
     enabled: !!token,
   });
 
