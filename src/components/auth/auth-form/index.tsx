@@ -36,8 +36,6 @@ export const AuthForm = ({
     },
   });
 
-  console.log("form", form.watch());
-
   return (
     <div className="h-screen w-full flex items-center justify-center">
       <Card className="w-[350px]">
