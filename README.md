@@ -48,6 +48,7 @@ Authentication application built with Vite, React and TypeScript that provides s
 - Tailwind CSS 3.4.0
 - Shadcn/ui 0.9.4
 - Axios 1.7.9
+- Framer Motion 12.0.6
 
 ## Features in Detail
 ### Authentication
