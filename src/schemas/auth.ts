@@ -1,18 +1,27 @@
 import { z } from "zod";
 
-export const authSchema = (t: (arg: string) => string) =>
+export const authSchema = (
+  t: (arg: string) => string,
+  mode: "login" | "register"
+) =>
   z
     .object({
-      email: z.string().email({ message: t("validation.email") }),
+      email: z
+        .string()
+        .min(1, { message: t("validation.required") })
+        .email({ message: t("validation.email") }),
       password: z
         .string()
         .min(6, { message: t("validation.passwordMin") })
         .max(50, { message: t("validation.passwordMax") }),
-      confirmPassword: z.string().optional(),
+      confirmPassword:
+        mode === "register"
+          ? z.string().min(1, { message: t("validation.required") })
+          : z.string().optional(),
     })
     .refine(
       (data) => {
-        if (data.confirmPassword) {
+        if (mode === "register") {
           return data.password === data.confirmPassword;
         }
         return true;

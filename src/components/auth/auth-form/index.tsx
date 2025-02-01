@@ -34,7 +34,7 @@ export const AuthForm = ({
   const loginMode = mode === "login";
 
   const form = useForm<AuthSchema>({
-    resolver: zodResolver(authSchema(t)),
+    resolver: zodResolver(authSchema(t, mode)),
     defaultValues: {
       email: "",
       password: "",
