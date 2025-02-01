@@ -5,7 +5,7 @@ import { I18nextProvider } from "react-i18next";
 import { AuthProvider } from "./auth-provider";
 import { ThemeProvider } from "./theme-provider";
 
-import i18n from "@/i18n";
+import i18n from "@/config/i18n";
 
 const queryClient = new QueryClient();
 

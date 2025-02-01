@@ -12,7 +12,7 @@ i18n
     supportedLngs: ["en", "ru"],
     ns: ["common"],
     defaultNS: "common",
-    debug: true,
+    debug: false,
     interpolation: {
       escapeValue: false,
     },
