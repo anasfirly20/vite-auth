@@ -20,7 +20,6 @@
     "logout": "Logout"
   },
   "navbar": {
-    "home": "Auth App",
     "login": "Login",
     "signup": "Sign up"
   },
