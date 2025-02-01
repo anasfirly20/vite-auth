@@ -1,0 +1,41 @@
+{
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "noAccount": "Don't have an account? Register",
+    "haveAccount": "Already have an account? Login"
+  },
+  "dashboard": {
+    "title": "Profile Dashboard",
+    "email": "Email",
+    "id": "ID",
+    "logout": "Logout"
+  },
+  "navbar": {
+    "home": "Auth App",
+    "login": "Login",
+    "signup": "Sign up"
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "notification": {
+    "success": {
+      "login":"Login successful!",
+      "register": "Registration successful!",
+      "logout": "Logout successful!"
+    },
+    "error": {
+      "login": "Login failed. Please check your credentials.",
+      "register": "Registration failed. Please try again."
+    }
+  }
+}
