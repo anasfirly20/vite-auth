@@ -81,3 +81,42 @@ src/
 ├── providers/   
 ├── routes/      
 └── schemas/  
+
+
+## Screenshots
+
+### Authentication Pages
+
+#### Light Mode
+<p align="center">
+  <img src="./src/assets/screenshots/light_1.png" width="600" alt="Auth Light Mode" />
+</p>
+
+#### Dark Mode
+<p align="center">
+  <img src="./src/assets/screenshots/dark_1.png" width="600" alt="Auth Dark Mode" />
+</p>
+
+### Registration Pages
+
+#### Light Mode
+<p align="center">
+  <img src="./src/assets/screenshots/light_2.png" width="600" alt="Registration Light Mode" />
+</p>
+
+#### Dark Mode
+<p align="center">
+  <img src="./src/assets/screenshots/dark_2.png" width="600" alt="Registration Dark Mode" />
+</p>
+
+### Dashboard Pages
+
+#### Light Mode
+<p align="center">
+  <img src="./src/assets/screenshots/light_3.png" width="600" alt="Dashboard Light Mode" />
+</p>
+
+#### Dark Mode
+<p align="center">
+  <img src="./src/assets/screenshots/dark_3.png" width="600" alt="Dashboard Dark Mode" />
+</p>
