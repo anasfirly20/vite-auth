@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -17,23 +18,18 @@ export const useAuthPage = (props: UseAuthPage) => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const handleLogin = async (body: AuthCredentials) => {
-    try {
-      const res = await UserApi.login({
-        email: body.email,
-        password: body.password,
-      });
-
-      if (res.token) {
-        setToken(res.token);
-        navigate("/dashboard", {
-          replace: true,
-        });
+  const loginMutation = useMutation({
+    mutationFn: (body: AuthCredentials) => UserApi.login(body),
+    onSuccess: (data) => {
+      if (data.token) {
+        setToken(data.token);
+        navigate("/dashboard", { replace: true });
         toast({
           description: "✅ Login successful!",
         });
       }
-    } catch (error) {
+    },
+    onError: (error: Error) => {
       console.error(error);
       toast({
         description:
@@ -41,26 +37,21 @@ export const useAuthPage = (props: UseAuthPage) => {
             ? `❌ ${error.response?.data?.message || error.message}`
             : "❌ Login failed!",
       });
-    }
-  };
+    },
+  });
 
-  const handleRegister = async (body: AuthCredentials) => {
-    try {
-      const res = await UserApi.register({
-        email: body.email,
-        password: body.password,
-      });
-
-      if (res.token) {
-        setToken(res.token);
-        navigate("/dashboard", {
-          replace: true,
-        });
+  const registerMutation = useMutation({
+    mutationFn: (body: AuthCredentials) => UserApi.register(body),
+    onSuccess: (data) => {
+      if (data.token) {
+        setToken(data.token);
+        navigate("/dashboard", { replace: true });
         toast({
           description: "✅ Registration successful!",
         });
       }
-    } catch (error) {
+    },
+    onError: (error: Error) => {
       console.error(error);
       toast({
         description:
@@ -68,22 +59,21 @@ export const useAuthPage = (props: UseAuthPage) => {
             ? `❌ ${error.response?.data?.message || error.message}`
             : "❌ Registration failed!",
       });
-    }
-  };
+    },
+  });
 
   const handleSubmit = (values: AuthSchema) => {
+    const credentials = {
+      email: values.email,
+      password: values.password,
+    };
+
     if (mode === "login") {
-      handleLogin({
-        email: values.email,
-        password: values.password,
-      });
+      loginMutation.mutate(credentials);
     }
 
     if (mode === "register") {
-      handleRegister({
-        email: values.email,
-        password: values.password,
-      });
+      registerMutation.mutate(credentials);
     }
   };
 
@@ -94,5 +84,6 @@ export const useAuthPage = (props: UseAuthPage) => {
   return {
     handleSubmit,
     handleToggleMode,
+    isLoading: loginMutation.isPending || registerMutation.isPending,
   };
 };

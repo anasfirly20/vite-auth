@@ -17,10 +17,16 @@ import { authSchema, AuthSchema } from "@/schemas/auth";
 interface AuthFormProps {
   mode: "login" | "register";
   onSubmit: (values: AuthSchema) => void;
-  onToggleMode: () => void;
+  onToggleMode: VoidFunction;
+  isLoading: boolean;
 }
 
-export const AuthForm = ({ mode, onSubmit, onToggleMode }: AuthFormProps) => {
+export const AuthForm = ({
+  mode,
+  onSubmit,
+  onToggleMode,
+  isLoading,
+}: AuthFormProps) => {
   const form = useForm<AuthSchema>({
     resolver: zodResolver(authSchema),
     defaultValues: {
@@ -90,7 +96,7 @@ export const AuthForm = ({ mode, onSubmit, onToggleMode }: AuthFormProps) => {
                   )}
                 />
               )}
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full" loading={isLoading}>
                 {mode === "login" ? "Sign in" : "Sign up"}
               </Button>
               <div className="text-center mt-4">
