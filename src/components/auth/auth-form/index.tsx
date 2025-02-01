@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 import { TFunction } from "i18next";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -32,7 +33,6 @@ export const AuthForm = ({
   t,
 }: AuthFormProps) => {
   const loginMode = mode === "login";
-
   const form = useForm<AuthSchema>({
     resolver: zodResolver(authSchema(t, mode)),
     defaultValues: {
@@ -42,7 +42,6 @@ export const AuthForm = ({
     },
   });
 
-  // Clear errors when switching between login/registration mode
   useEffect(() => {
     form.clearErrors();
     form.reset();
@@ -52,13 +51,40 @@ export const AuthForm = ({
     <div className="h-screen w-full flex items-center justify-center">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">
-            {loginMode ? t("auth.login") : t("auth.register")}
-          </CardTitle>
+          <motion.div
+            key={mode}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.4,
+              ease: "easeOut",
+              type: "spring",
+              stiffness: 100,
+              damping: 10,
+            }}
+          >
+            <CardTitle className="text-2xl font-bold text-center">
+              {loginMode ? t("auth.login") : t("auth.register")}
+            </CardTitle>
+          </motion.div>
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <motion.form
+              key={mode}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.4,
+                ease: "easeOut",
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+                delay: 0.1,
+              }}
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-4"
+            >
               <FormField
                 control={form.control}
                 name="email"
@@ -126,7 +152,7 @@ export const AuthForm = ({
                   {loginMode ? t("auth.noAccount") : t("auth.haveAccount")}
                 </Button>
               </div>
-            </form>
+            </motion.form>
           </Form>
         </CardContent>
       </Card>
