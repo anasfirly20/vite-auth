@@ -37,5 +37,12 @@
       "login": "Login failed. Please check your credentials.",
       "register": "Registration failed. Please try again."
     }
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Please enter a valid email address.",
+    "passwordMin": "Password must be at least 6 characters long.",
+    "passwordMax": "Password cannot be longer than 50 characters.",
+    "passwordMatch": "Passwords do not match."
   }
 }

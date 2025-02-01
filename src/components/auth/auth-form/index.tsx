@@ -32,7 +32,7 @@ export const AuthForm = ({
   t,
 }: AuthFormProps) => {
   const form = useForm<AuthSchema>({
-    resolver: zodResolver(authSchema),
+    resolver: zodResolver(authSchema(t)),
     defaultValues: {
       email: "",
       password: "",
